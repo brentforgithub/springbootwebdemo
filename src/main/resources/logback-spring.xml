@@ -164,6 +164,7 @@
         不能设置为INHERITED或者同义词NULL。默认是DEBUG
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
+    <logger name="com.brent.demo.dao" level="DEBUG" />
 
     <!-- 4. 最终的策略 -->
     <!-- 4.1 开发环境:打印控制台-->
@@ -178,6 +179,8 @@
         <appender-ref ref="WARN_FILE" />
         <appender-ref ref="ERROR_FILE" />
     </root>
+
+
 
     <!-- 4.2 生产环境:输出到文档
     <springProfile name="pro">

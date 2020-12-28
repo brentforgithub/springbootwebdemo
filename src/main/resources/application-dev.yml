@@ -1,9 +1,6 @@
 demo:
   property: dev
 
-logging:
-  config: classpath:logback-spring.xml
-
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
