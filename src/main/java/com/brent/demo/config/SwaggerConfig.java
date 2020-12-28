@@ -23,8 +23,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("童程童美")
-                .description("童程童美-营销系统api")
+                .title("swagger")
+                .description("swagger-api")
                 .version("1.0")
                 .build();
     }
