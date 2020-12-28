@@ -3,8 +3,8 @@ package com.brent.demo.common.basecontroller;
 import lombok.Data;
 
 @Data
-public class ResBody {
+public class ResBody<T> {
     private Integer state;
     private String msg;
-    private Object data;
+    private T data;
 }

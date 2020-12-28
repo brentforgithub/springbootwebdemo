@@ -1,5 +1,7 @@
 package com.brent.demo.controller;
 
+import com.brent.demo.common.basecontroller.BaseC;
+import com.brent.demo.common.basecontroller.ResBody;
 import com.brent.demo.config.DemoConfig;
 import com.brent.demo.dao.NameDemoMapper;
 import com.brent.demo.mode.po.NameDemo;
@@ -28,8 +30,23 @@ public class DemoController {
 
     @RequestMapping(value = "/showDemo",method = {RequestMethod.GET})
     @ResponseBody
-    public NameDemo showDemo(@RequestParam Integer id) {
-        return nameDemoMapper.selectByPrimaryKey(id);
+    public ResBody<NameDemo> showDemo(@RequestParam Integer id) {
+        ResBody<NameDemo> resBody = new ResBody<>();
+        resBody.setState(BaseC.SUCCESS_STATE);
+        resBody.setData(nameDemoMapper.selectByPrimaryKey(id));
+        return resBody;
+    }
+
+    @RequestMapping(value = "/showDemo2",method = {RequestMethod.GET})
+    @ResponseBody
+    public ResBody<NameDemo> showDemo2(@RequestParam Integer id) {
+        if(id == 2){
+            throw new RuntimeException("sdfsdfsdf");
+        }
+        ResBody<NameDemo> resBody = new ResBody<>();
+        resBody.setState(BaseC.SUCCESS_STATE);
+        resBody.setData(nameDemoMapper.selectByPrimaryKey(id));
+        return resBody;
     }
 
 
