@@ -164,7 +164,7 @@
         不能设置为INHERITED或者同义词NULL。默认是DEBUG
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
-    <logger name="com.brent.demo.dao" level="DEBUG" />
+    <logger name="com.brent.demo.dao" level="INFO" />
 
     <!-- 4. 最终的策略 -->
     <!-- 4.1 开发环境:打印控制台-->
@@ -172,7 +172,7 @@
         <logger name="com.sdcm.pmp" level="debug"/>
     </springProfile>
 
-    <root level="debug">
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="DEBUG_FILE" />
         <appender-ref ref="INFO_FILE" />

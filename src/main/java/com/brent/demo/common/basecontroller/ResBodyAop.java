@@ -1,5 +1,6 @@
 package com.brent.demo.common.basecontroller;
 
+import com.brent.demo.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,8 +10,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Objects;
 
 @Slf4j
 @Aspect
@@ -23,17 +22,12 @@ public class ResBodyAop {
     @Around("controllerMethod()")
     public Object aroundMethod(ProceedingJoinPoint pjd) throws Throwable {
         Object result = null;
-        String methodName = pjd.getSignature().getName();
-
-
         try {
-            //执行目标方法
             result = pjd.proceed();
         } catch (Throwable e) {
-            Method method = ((MethodSignature)pjd.getSignature()).getMethod();
-            if(method.getReturnType().getName().equals(ResBody.class.getName())){
+            if( e instanceof BusinessException && isEquals(pjd)){
                 ResBody resBody = new ResBody();
-                resBody.setState(BaseC.FAIL_STATE);
+                resBody.setState(((BusinessException) e).getState());
                 resBody.setMsg(e.getMessage());
                 result = resBody;
             }else {
@@ -41,6 +35,16 @@ public class ResBodyAop {
             }
         }
         return result;
+    }
+
+    /**
+     * 判断返回值类型
+     * @param pjd
+     * @return
+     */
+    private boolean isEquals(ProceedingJoinPoint pjd) {
+        Method method = ((MethodSignature)pjd.getSignature()).getMethod();
+        return method.getReturnType().getName().equals(ResBody.class.getName());
     }
 }
 
