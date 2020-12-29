@@ -20,7 +20,7 @@ public class ResBodyAop {
     private void controllerMethod(){};
 
     @Around("controllerMethod()")
-    public Object aroundMethod(ProceedingJoinPoint pjd) throws Throwable {
+    public Object disposeOfException(ProceedingJoinPoint pjd) throws Throwable {
         Object result = null;
         try {
             result = pjd.proceed();
@@ -31,6 +31,7 @@ public class ResBodyAop {
                 resBody.setMsg(e.getMessage());
                 result = resBody;
             }else {
+                log.error("ResBodyAop:disposeOfException",e);
                 throw e;
             }
         }
