@@ -27,4 +27,6 @@ public interface NameDemoMapper {
     int updateByPrimaryKeySelective(NameDemo record);
 
     int updateByPrimaryKey(NameDemo record);
+
+    int insertList(@Param("demos") List<NameDemo> demos);
 }
