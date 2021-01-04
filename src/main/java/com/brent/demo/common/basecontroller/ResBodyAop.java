@@ -45,7 +45,7 @@ public class ResBodyAop {
      */
     private boolean isEquals(ProceedingJoinPoint pjd) {
         Method method = ((MethodSignature)pjd.getSignature()).getMethod();
-        return method.getReturnType().getName().equals(ResBody.class.getName());
+        return method.getReturnType() == ResBody.class;
     }
 }
 
