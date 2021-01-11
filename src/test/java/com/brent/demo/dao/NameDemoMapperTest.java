@@ -1,14 +1,13 @@
 package com.brent.demo.dao;
 
-import com.alibaba.fastjson.JSON;
 import com.brent.demo.mode.po.NameDemo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class NameDemoMapperTest {
@@ -23,11 +22,10 @@ class NameDemoMapperTest {
 
     @Test
     void insertBatch() {
-        Calendar calendar= Calendar.getInstance();
-        long now = calendar.getTime().getTime();
+        long now = System.currentTimeMillis();
         //10年前
-        now = now - 100*1000*60*60*24*365*10;
-        for(int z=22;z<26;z++){
+        now = now - 1000l*60*60*24*365*10;
+        for(int z=23;z<28;z++){
             for(int y=0;y<150;y++){
                 List<NameDemo> demos = new ArrayList<>(1000);
                 for (int i=0;i<20000;i++){
@@ -43,7 +41,7 @@ class NameDemoMapperTest {
                 long st = System.currentTimeMillis();
                 nameDemoMapper.insertList(demos);
                 System.out.println("新增时长" + (System.currentTimeMillis()-st));
-                System.out.println("新增" + ((z-22)*3000000 + y*20000) + "条");
+                System.out.println("新增" + ((z-23)*3000000 + y*20000) + "条");
             }
             phone.clear();
         }
@@ -79,6 +77,25 @@ class NameDemoMapperTest {
     }
     public static char getRandomChar() {
         return (char) (0x4e00 + (int) (Math.random() * (0x9fa5 - 0x4e00 + 1)));
+    }
+
+    @Test
+    public void testTime(){
+        long now = System.currentTimeMillis();
+        System.out.println(now);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(now)));
+        //10年前
+        now = now - 1000l*60*60*24*365*10;
+        System.out.println(1000l*60*60*24*365*10);
+        now = now - 1000;
+        System.out.println(now);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(now)));
+    }
+
+    public static void test01(){
+        if(1 != 2){
+
+        }
     }
 
 
