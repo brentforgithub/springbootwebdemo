@@ -27,24 +27,26 @@ class NameDemoMapperTest {
         long now = System.currentTimeMillis();
         //10年前
         now = now - 1000l*60*60*24*365*10;
-        for(int z=30,x=z;z<31;z++){
-            for(int y=0;y<150;y++){
+        int loopW = 150;
+        int loopN = 20000;
+        for(int z=11,x=z;z<12;z++){
+            for(int y=0;y<loopW;y++){
                 List<NameDemo> demos = new ArrayList<>(20000);
-                for (int i=0;i<20000;i++){
+                for (int i=0;i<loopN;i++){
                     NameDemo nameDemo = new NameDemo();
-                    nameDemo.setAge(random.nextInt(100) + 20);
-                    now = now + random.nextInt(60)*100;
+                    nameDemo.setAge(random.nextInt(5000) + 20);
+                    now = now + random.nextInt(60)*1000;
                     nameDemo.setCreateTime(new Date(now));
                     nameDemo.setTelephone(getNewRandomTelephone("" + z,random));
                     nameDemo.setCName(getRandomName(random.nextInt(4) + 1));
-                    nameDemo.setCState(random.nextInt(6) + 1);
+                    nameDemo.setCState(random.nextInt(300) + 1);
                     demos.add(nameDemo);
                     //nameDemoMapper.insert(nameDemo);
                 }
                 long st = System.currentTimeMillis();
                 nameDemoMapper.insertList(demos);
                 System.out.println("新增时长" + (System.currentTimeMillis()-st));
-                System.out.println("新增" + ((z-x)*3000000 + y*20000) + "条");
+                System.out.println("新增" + ((z-x)*loopW*loopN + (y+1)*loopN) + "条");
             }
             phone.clear();
         }
