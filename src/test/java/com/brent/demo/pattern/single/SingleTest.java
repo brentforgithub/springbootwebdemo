@@ -1,4 +1,4 @@
-package com.brent.demo.single;
+package com.brent.demo.pattern.single;
 
 import org.junit.Test;
 
